@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Website</title>
+    <style>
+        /* Global styles */
+        body {
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs2B9uMnwqiygXbabpHqghhDcSNKN1y4zJWg&usqp=CAU");
+            object-fit: cover;
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .adiv {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px; /* Add margin bottom for spacing */
+        }
+
+        .compose-btn {
+            background-color: #007bff; /* Blue background color */
+            color: white; /* White text color */
+            padding: 10px 20px; /* Add padding for better appearance */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Add border-radius for rounded corners */
+            text-decoration: none; /* Remove default link underline */
+            font-size: 16px; /* Adjust font size */
+        }
+
+        .compose-btn:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+
+        .post-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            padding: 70px;
+            justify-items: center;
+            grid-gap: 320px;
+        }
+
+        .post {
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            padding: 60px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0.8;
+        }
+
+        .post h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .post p {
+            margin-bottom: 10px;
+        }
+
+        .post img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .navigation {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="adiv">
+        <h1>A2Z BLOGS</h1>
+        <a href="/compose" class="compose-btn">Compose</a>
+    </div>
+    <div class="post-container">
+        <% if (posts.length === 0) { %>
+            <p>No posts found.</p>
+        <% } else { %>
+            <% posts.forEach(post => { %>
+                <div class="post">
+                    <h2><%= post.title %></h2>
+                    <p><%= post.content %></p>
+                    <img src="/images/<%= post.image %>" alt="Post Image">
+                    <form action="/delete/<%= post._id %>" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+</body>
+</html>
